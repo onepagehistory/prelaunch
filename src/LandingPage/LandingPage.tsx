@@ -6,6 +6,7 @@ export const LandingPage = () => {
         <div className="landing-page">
             <h1>World History Page</h1>
             <h2>Educational Project</h2>
+            <img src="/assets/bg-prelaunch-1.png" alt="bg-prelaunch"/>
         </div>
     )
 }
