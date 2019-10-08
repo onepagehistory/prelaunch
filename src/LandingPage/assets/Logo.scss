@@ -1,0 +1,17 @@
+.logo {
+    color: #fff;
+    font-size: 1.2rem;
+    display: flex;
+    width: fit-content;
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    text-decoration: none;
+
+    width: 20rem;
+
+
+    &__name {
+        margin: 0 1rem;
+    }
+}

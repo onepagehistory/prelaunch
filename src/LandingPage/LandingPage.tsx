@@ -1,12 +1,15 @@
 import * as React from 'react';
+
+import Logo from './assets/Logo'
 import './LandingPage.scss';
+import image from './assets/bg.png';
 
 export const LandingPage = () => {
     return (
         <div className="landing-page">
-            <h1>World History Page</h1>
-            <h2>Educational Project</h2>
-            <img src="/assets/bg-prelaunch-1.png" alt="bg-prelaunch"/>
+            <Logo/>
+            <img className="bg-image" src={image} alt="sdf"/>
         </div>
     )
 }
+
