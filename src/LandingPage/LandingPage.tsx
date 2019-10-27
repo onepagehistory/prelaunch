@@ -10,7 +10,7 @@ const SLICE_COUNT = 12;
 const sliceArrayHelper = new Array(SLICE_COUNT).fill(undefined);
 export class LandingPage extends React.Component<{},any> {
     sliderRef = React.createRef<HTMLDivElement>();
-    slicesRefs = sliceArrayHelper.map(()=> React.createRef<HTMLDivElement>());
+    slicesRefs = sliceArrayHelper.map(()=> React.createRef<HTMLImageElement>());
 
     componentDidMount(){
         let i = 0;
@@ -22,7 +22,7 @@ export class LandingPage extends React.Component<{},any> {
             const imgSrc = arrSrc[i];
             this.showImage(imgSrc);
             i++;
-            setTimeout(shoNextImage, 3000);
+            setTimeout(shoNextImage, 2000);
         }
 
         setTimeout(shoNextImage, 1000);
@@ -39,13 +39,13 @@ export class LandingPage extends React.Component<{},any> {
                 ref.current.style.width = '1200%';
                 ref.current.style.position = 'relative';
                 ref.current.style.left = '-' + i * 100 + '%';
-                ref.current.style.backgroundImage = `url(${imgSrc})`;
+                ref.current.src = imgSrc;
         })
 
         setTimeout(()=>{
             this.sliderRef.current.classList.add('slide-in');
             this.sliderRef.current.classList.remove('slide-out');
-        }, 2300)
+        }, 1000)
     }
 
 
@@ -58,8 +58,8 @@ export class LandingPage extends React.Component<{},any> {
                 <div className="slider" ref={this.sliderRef}>{
                     sliceArrayHelper.map((_, i) =>
                         <div key={i} className="wrap">
-                            <div  ref={ this.slicesRefs[i] } className={'img-wrapper'}>
-                                {/* <img ref={ this.slicesRefs[i] } className={ 'splitted-image' } /> */}
+                            <div className={'img-wrapper'}>
+                                <img ref={ this.slicesRefs[i] } className={ 'splitted-image' } />
                                 </div>
                             </div>
                         )}
