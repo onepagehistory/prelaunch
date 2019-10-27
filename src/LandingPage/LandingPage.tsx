@@ -5,37 +5,69 @@ import './LandingPage.scss';
 import image from './assets/bg.png';
 
 const image2 = 'http://pngimg.com/uploads/yuri_gagarin/yuri_gagarin_PNG65808.png';
-const arrImgSrc = [image, image2];
+const arrSrc = [image, image2];
 const SLICE_COUNT = 12;
 const sliceArrayHelper = new Array(SLICE_COUNT).fill(undefined);
 export class LandingPage extends React.Component<{},any> {
     sliderRef = React.createRef<HTMLDivElement>();
-    slicesRefs = sliceArrayHelper.map(()=> React.createRef<HTMLImageElement>());
+    slicesRefs = sliceArrayHelper.map(()=> React.createRef<HTMLDivElement>());
 
     componentDidMount(){
+        let i = 0;
+        const shoNextImage = () => {
+            if (i >= arrSrc.length) {
+                i = 0;
+            }
+
+            const imgSrc = arrSrc[i];
+            this.showImage(imgSrc);
+            i++;
+            setTimeout(shoNextImage, 3000);
+        }
+
+        setTimeout(shoNextImage, 1000);
+    }
+
+    showImage(imgSrc) {
+        this.sliderRef.current.classList.remove('slide-in');
+        this.sliderRef.current.classList.add('slide-out');
         const width = this.sliderRef.current.offsetWidth;
         const sliceWidth = width / SLICE_COUNT;
         const imgPosition = -sliceWidth;
-        const items = [];
-
         this.slicesRefs.forEach((ref, i) => {
-            const imgPosDynamic = imgPosition * i;
-                ref.current.style.objectPosition = imgPosDynamic + 'px';
-                ref.current.src = image;
+                const imgPosDynamic = imgPosition * i;
+                ref.current.style.backgroundPositionX = imgPosDynamic + 'px';
+                ref.current.style.backgroundImage = `url(${imgSrc})`;
         })
         setTimeout(()=>{
             this.sliderRef.current.classList.add('slide-in');
-        }, 2000)
+            this.sliderRef.current.classList.remove('slide-out');
+        }, 2300)
     }
+
 
     render(){
         return (
             <div className="landing-page">
-                <Logo/>
+                <div className="item item-1">
+                    <Logo/>
+                </div>
                 <div className="slider" ref={this.sliderRef}>{
                     sliceArrayHelper.map((_, i) =>
-                        <div key={i} className="img-wrapper" style={{ left: (100 / 12) * i + '%' }}>
-                           <img ref={ this.slicesRefs[i] } className={ 'splitted-image' + ' splitted-image--' + i} /></div>)}</div>
+                        <div key={i} className="wrap">
+                            <div  ref={ this.slicesRefs[i] } className={'img-wrapper'}>
+                                {/* <img ref={ this.slicesRefs[i] } className={ 'splitted-image' } /> */}
+                                </div>
+                            </div>
+                        )}
+                </div>
+                <div className="item item-2">
+                    <h2>Events, People, Ages... New Look at the history</h2>
+                    <h1>COOMING SOON</h1>
+                </div>
+                <div className="item item-3">
+                    Follow us: icon icon icon
+                </div>
             </div>
         )
     }
