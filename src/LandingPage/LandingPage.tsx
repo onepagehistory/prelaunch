@@ -33,8 +33,6 @@ export class LandingPage extends React.Component<{},any> {
         this.sliderRef.current.classList.remove('slide-in');
         this.sliderRef.current.classList.add('slide-out');
         this.slicesRefs.forEach((ref, i) => {
-                ref.current.style.width = '1200%';
-                ref.current.style.position = 'relative';
                 ref.current.style.left = '-' + i * 100 + '%';
                 ref.current.src = imgSrc;
         })
