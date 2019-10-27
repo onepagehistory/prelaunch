@@ -45,20 +45,24 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
     box-sizing: border-box;
     overflow: hidden;
 
-    .slide-in & {
-        animation-name: imgIn;
-        animation-duration: 500ms;
-        animation-timing-function: linear;
-        animation-iteration-count: 1;
-        animation-fill-mode: backwards;
-    }
 
-    .slide-out & {
+    .slide-in & {
+        
+        transform-origin: right;
         animation-name: imgOut;
         animation-duration: 500ms;
         animation-timing-function: linear;
         animation-iteration-count: 1;
         animation-fill-mode: forwards;
+    }
+
+    .slide-out & {
+        transform-origin: left;
+        animation-name: imgIn;
+        animation-duration: 500ms;
+        animation-timing-function: linear;
+        animation-iteration-count: 1;
+        animation-fill-mode: backwards;
     }
 }
 .item {
@@ -119,23 +123,22 @@ $items: 1,2,3;
 
 @keyframes imgIn {
     from {
-        transform: translateX(0%) rotateY(0deg);
-        // transform-origin: left;
+        transform: scaleX(0);
     }
 
     to {
-        transform: translateX(100%) rotateY(90deg);
+        transform: scaleX(1);
     }
 }
 
 @keyframes imgOut {
     from {
-        transform: translateX(-100%) rotateY(90deg);
-        // transform-origin: left;
+        transform: scaleX(1);
     }
 
     to {
-        transform: translateX(0) rotateY(0deg);
+        transform: scaleX(0);
+
     }
 }
 

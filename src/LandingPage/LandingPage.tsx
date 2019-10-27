@@ -22,7 +22,7 @@ export class LandingPage extends React.Component<{},any> {
             const imgSrc = arrSrc[i];
             this.showImage(imgSrc);
             i++;
-            setTimeout(shoNextImage, 2000);
+            setTimeout(shoNextImage, 3500);
         }
 
         setTimeout(shoNextImage, 1000);
@@ -45,7 +45,7 @@ export class LandingPage extends React.Component<{},any> {
         setTimeout(()=>{
             this.sliderRef.current.classList.add('slide-in');
             this.sliderRef.current.classList.remove('slide-out');
-        }, 1000)
+        }, 2500)
     }
 
 
