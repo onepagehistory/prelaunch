@@ -1,11 +1,11 @@
 import * as React from 'react';
-
 import Logo from './assets/Logo'
 import './LandingPage.scss';
-import image from './assets/bg.png';
 
+import image from './assets/bg.png';
 const image2 = 'http://pngimg.com/uploads/yuri_gagarin/yuri_gagarin_PNG65808.png';
 const arrSrc = [image, image2];
+
 const SLICE_COUNT = 12;
 const sliceArrayHelper = new Array(SLICE_COUNT).fill(undefined);
 export class LandingPage extends React.Component<{},any> {
@@ -36,9 +36,12 @@ export class LandingPage extends React.Component<{},any> {
         const imgPosition = -sliceWidth;
         this.slicesRefs.forEach((ref, i) => {
                 const imgPosDynamic = imgPosition * i;
-                ref.current.style.backgroundPositionX = imgPosDynamic + 'px';
+                ref.current.style.width = '1200%';
+                ref.current.style.position = 'relative';
+                ref.current.style.left = '-' + i * 100 + '%';
                 ref.current.style.backgroundImage = `url(${imgSrc})`;
         })
+
         setTimeout(()=>{
             this.sliderRef.current.classList.add('slide-in');
             this.sliderRef.current.classList.remove('slide-out');
