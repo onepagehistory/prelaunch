@@ -1,4 +1,4 @@
-import { merge, Observable, of, Subject, from, zip, timer, EMPTY } from 'rxjs';
+import { merge, Observable, of, Subject, from, zip, timer, EMPTY, scheduled, asyncScheduler } from 'rxjs';
 import * as React from 'react';
 
 import { shareReplay, ignoreElements, mergeMap, concatMap, repeat, takeUntil, tap, delay, retry, catchError } from 'rxjs/operators';
@@ -54,20 +54,25 @@ export default class LandingPage extends React.Component<{},any> {
             ...images$.map(img$ => img$.pipe(ignoreElements()))
         ).pipe(
             mergeMap(() =>
-                from(images$)
-                .pipe(
+                // enforing async for repeat() to work
+                scheduled(images$, asyncScheduler).pipe(
+                    // loop the slider
+                    repeat(),
                     // ensure images are spaced at least with SLIDE_DELAY time
-                    concatMap(img$ => zip(timer(SLIDE_DELAY), img$, (_, img) => img)),
+                    concatMap((img$, index) =>
+                        // no delay for the first slide
+                        zip(timer(index ? SLIDE_DELAY : 0), img$, (_, img) => img)
+                    ),
                     // hide previous image
                     tap(()=> this.hideImage()),
                     // delay displaying new image for slide-out animation
                     delay(500),
-                    // loop the slider
-                    repeat()
+                    // show the next image
+                    tap((src)=> this.showImage(src)),
                 )
             ),
             takeUntil(this.destroy$)
-        ).subscribe(src => this.showImage(src))
+        ).subscribe() // empty subscription: doing work in `tap`s
     }
 
     showImage(imgSrc) {
