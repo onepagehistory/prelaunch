@@ -1,48 +1,90 @@
 import * as React from 'react';
-import Logo from './assets/Logo'
+import { merge, Observable, of, Subject, from, zip, timer, EMPTY } from 'rxjs';
+import { shareReplay, ignoreElements, mergeMap, concatMap, repeat, takeUntil, tap, delay, retry, catchError } from 'rxjs/operators';
+import Logo from './assets/Logo';
 import './LandingPage.scss';
 
-import image from './assets/slide-1.png';
+import image1 from './assets/slide-1.png';
 import image2 from './assets/slide-2.png';
 import image3 from './assets/slide-3.png';
-const arrSrc = [image, image2, image3];
 
+const imageSources = [image1, image2, image3];
+
+const SLIDE_DELAY = 3000;
 const SLICE_COUNT = 12;
 const sliceArrayHelper = new Array(SLICE_COUNT).fill(undefined);
+
 export class LandingPage extends React.Component<{},any> {
     sliderRef = React.createRef<HTMLDivElement>();
     slicesRefs = sliceArrayHelper.map(()=> React.createRef<HTMLImageElement>());
+    destroy$ = new Subject<void>();
 
-    componentDidMount(){
-        let i = 0;
-        const shoNextImage = () => {
-            if (i >= arrSrc.length) {
-                i = 0;
-            }
+    componentDidMount() {
+        // turn image load into observable
+        const images$ = imageSources.map(src =>
+            new Observable(observer => {
+                const imageElement = document.createElement('img');
+                imageElement.addEventListener('load', () => {
+                    observer.next(src);
+                    observer.complete();
+                });
 
-            const imgSrc = arrSrc[i];
-            this.showImage(imgSrc);
-            i++;
-            setTimeout(shoNextImage, 3000);
-        }
+                imageElement.addEventListener('error', () => {
+                    // error will be handled below
+                    observer.error();
+                });
 
-        setTimeout(shoNextImage, 1000);
+                imageElement.src = src;
+            })
+            .pipe(
+                // retry 3 times
+                retry(3),
+                // if an error occurs -- skip the image
+                catchError(() => EMPTY),
+                // we only need to load it once
+                shareReplay(1)
+            )
+        );
+
+        merge(
+            of(void 0),
+            // a hack to force images to start loading immediately
+            ...images$.map(img$ => img$.pipe(ignoreElements()))
+        ).pipe(
+            mergeMap(() =>
+                from(images$)
+                .pipe(
+                    // ensure images are spaced at least with SLIDE_DELAY time
+                    concatMap(img$ => zip(timer(SLIDE_DELAY), img$, (_, img) => img)),
+                    // hide previous image
+                    tap(()=> this.hideImage()),
+                    // delay displaying new image for slide-out animation
+                    delay(500),
+                    // loop the slider
+                    repeat()
+                )
+            ),
+            takeUntil(this.destroy$)
+        ).subscribe(src => this.showImage(src))
     }
 
     showImage(imgSrc) {
         this.sliderRef.current.classList.remove('slide-in');
         this.sliderRef.current.classList.add('slide-out');
         this.slicesRefs.forEach((ref, i) => {
-                ref.current.style.left = '-' + i * 100 + '%';
-                ref.current.src = imgSrc;
+            ref.current.style.left = '-' + i * 100 + '%';
+            ref.current.src = imgSrc;
         })
-
-        setTimeout(()=>{
-            this.sliderRef.current.classList.add('slide-in');
-            this.sliderRef.current.classList.remove('slide-out');
-        }, 2500)
     }
 
+    hideImage() {
+        this.sliderRef.current.classList.add('slide-in');
+        this.sliderRef.current.classList.remove('slide-out');
+    }
+
+    componentWillUnmount(){
+        this.destroy$.next(void 0);
+    }
 
     render(){
         return (
