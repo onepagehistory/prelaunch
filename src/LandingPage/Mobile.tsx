@@ -8,9 +8,9 @@ export const Mobile = () => {
         <div className="landing-page is-mobile">
             <Logo/>
 
-            <div className="announcment">
-                <h2 className="title">Events, People, Ages... New Look at the history</h2>
-                <h1 className="title title--large">COOMING SOON</h1>
+            <div className="announcement">
+                <h2 className="title">People, Events, Epochs... A new look at the history</h2>
+                <h1 className="title title--large">COMING SOON</h1>
             </div>
 
             <Social/>

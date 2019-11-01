@@ -109,8 +109,8 @@ export default class LandingPage extends React.Component<{},any> {
                         )}
                 </div>
                 <div className="item item-2">
-                    <h2 className="title">Events, People, Ages... New Look at the history</h2>
-                    <h1 className="title title--large">COOMING SOON</h1>
+                    <h2 className="title">People, Events, Epochs... A new look at the history</h2>
+                    <h1 className="title title--large">COMING SOON</h1>
                 </div>
                 <div className="item item-3">
                     <Social/>
