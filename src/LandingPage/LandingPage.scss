@@ -1,9 +1,5 @@
 $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
 
-// .is-mobile {
-//     overflow: hidden; // prevent the scroll
-// }
-
 .landing-page {
     text-align: center;
     background: linear-gradient(180deg, #4F4365 0%, #313A61 100%);
@@ -12,11 +8,20 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
     color: #fff;
     box-sizing: border-box;
 
-    .is-mobile & {
+    // MOBILE
+    &.is-mobile {
         display: flex;
         flex-direction: column;
-        padding: 15% 3rem 10%; 
+        padding: 15% 3rem 10%;
         text-align: left;
+
+        .title {
+            font-size: 1.8rem;
+
+            &--large {
+                font-size: 3.8rem;
+            }
+        }
     }
 }
 
@@ -25,23 +30,14 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
     margin-bottom: .5em;
     font-size: 3.6rem;
 
-    .is-mobile & {
-        font-size: 1.8rem;
-    }
-
     &--large {
         font-size: 6rem;
-
-        .is-mobile & {
-            font-size: 3.8rem;
-        }
     }
 }
 
 .announcment {
     margin: 40% 0 10%;
 }
-
 
 .wrap {
     position: relative;

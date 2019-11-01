@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import Logo from './assets/Logo'
 import Social from './social-media/Social'
 
 
-function Mobile(){
+export const Mobile = () => {
     return (
-        <div className="landing-page">
+        <div className="landing-page is-mobile">
             <Logo/>
 
             <div className="announcment">
