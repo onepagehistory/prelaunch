@@ -1,0 +1,26 @@
+.social-box {
+    display: flex;
+
+    .is-mobile & {
+        margin-top: auto;
+    }
+
+    &__icons {
+        display: inline-grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 1.8rem;
+        vertical-align: middle;
+        align-items: center;
+    }
+
+    &__cta {
+        font-size: 2rem;
+        margin: 0;
+        margin-right: 2.4rem;
+
+        .is-mobile & {
+            font-size: 1.8rem;
+            margin-right: 1.8rem;
+        }
+    }
+}
