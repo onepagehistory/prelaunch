@@ -9,6 +9,7 @@ import './LandingPage.scss';
 import image1 from './assets/images/slide-1.png';
 import image2 from './assets/images/slide-2.png';
 import image3 from './assets/images/slide-3.png';
+import { SubscribeForm } from '../SubscribeForm/SubscribeForm';
 
 const imageSources = [image1, image2, image3];
 
@@ -112,7 +113,12 @@ export default class LandingPage extends React.Component<{},any> {
                     <h2 className="title">People, Events, Epochs... A new look at the history</h2>
                     <h1 className="title title--large">COMING SOON</h1>
                 </div>
+
                 <div className="item item-3">
+                    <SubscribeForm />
+                </div>
+
+                <div className="item item-4">
                     <Social/>
                 </div>
             </div>

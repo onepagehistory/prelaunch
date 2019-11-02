@@ -106,6 +106,7 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
 
 .item {
     left: 17%;
+    right: 17%;
     position: absolute;
     opacity: 0;
     z-index: 10;
@@ -122,10 +123,14 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
 }
 
 .item-3 {
+    top: 65%;
+}
+
+.item-4 {
     top: 85%;
 }
 
-$items: 1,2,3;
+$items: 1,2,3,4;
 @each $i in $items {
     .item-#{$i} {
         animation-name: contentAppear;
