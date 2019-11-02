@@ -6,9 +6,9 @@ import Logo from './assets/Logo';
 import Social from './social-media/Social'
 import './LandingPage.scss';
 
-import image1 from './assets/images/slide-1.png';
-import image2 from './assets/images/slide-2.png';
-import image3 from './assets/images/slide-3.png';
+import image1 from './assets/images/slide-1-min.png';
+import image2 from './assets/images/slide-2-min.png';
+import image3 from './assets/images/slide-3-min.png';
 import { SubscribeForm } from '../SubscribeForm/SubscribeForm';
 
 const imageSources = [image1, image2, image3];
