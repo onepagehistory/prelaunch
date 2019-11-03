@@ -54,7 +54,7 @@ export const SubscribeForm = () => {
         <div className="subscribe-form">
             { !isLoading
             ? <form onSubmit={onSubmit}>
-                <input name="email" className="subscribe-form__input" type="email" placeholder="Enter your email to subscribe" />
+                <input name="email" required className="subscribe-form__input" type="email" placeholder="Enter your email to subscribe" />
                 <button className="subscribe-form__button" type="submit">
                 <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
                     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
