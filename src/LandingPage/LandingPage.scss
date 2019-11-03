@@ -2,7 +2,6 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
 
 .landing-page {
     text-align: center;
-    background: linear-gradient(180deg, #4F4365 0%, #313A61 100%);
     background-blend-mode: overlay;
     height: 100vh;
     color: #fff;
@@ -14,6 +13,21 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
         flex-direction: column;
         padding: 15% 3rem 10%;
         text-align: left;
+        position: relative;
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('./assets/images/slide-2-min.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            opacity: .1;
+        }
 
         .title {
             font-size: 1.8rem;
