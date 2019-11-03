@@ -25,17 +25,35 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
     }
 }
 
-.title {
-    font-weight: 400;
-    margin-bottom: .5em;
-    font-size: 3.6rem;
+.announcement {
+    margin: 40% 0 10%;
 
-    &--large {
-        font-size: 6rem;
+    .is-mobile & {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
     }
 }
 
-.announcement {
+.title {
+    font-weight: 400;
+    margin-bottom: .5em;
+    font-size: 3rem;
+
+    .is-mobile & {
+        font-size: 1.8rem;
+    }
+
+    &--large {
+        font-size: 4rem;
+
+        .is-mobile & {
+            font-size: 3.8rem;
+        }
+    }
+}
+
+.announcment {
     margin: 40% 0 10%;
 }
 
@@ -43,31 +61,35 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
     position: relative;
     overflow: hidden;
 
-    &:after {
-        content: '';
-        position: absolute;
-        background-color: rgba(255,255,255, .1);
-        width: 1px;
-        right: 0;
-        top: 0;
-        flex: 0 0;
-
-        animation: lines 400ms ease-in-out;
-        animation-iteration-count: 1;
-        animation-fill-mode: forwards;
-    }
-
-    @each $index in $indexes {
-        &:nth-child(#{$index}){
-            .img-wrapper {
-                animation-delay: #{$index*30}ms;
-            }
-
-            &:after {
-                animation-delay: #{$index*50}ms;
+    .lines & {
+        &:after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255,255,255, .1);
+            width: 1px;
+            right: 0;
+            top: 0;
+            flex: 0 0;
+    
+            animation: lines 400ms ease-in-out;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+    
+        @each $index in $indexes {
+            &:nth-child(#{$index}){
+                .img-wrapper {
+                    animation-delay: #{$index*30}ms;
+                }
+    
+                &:after {
+                    animation-delay: #{$index*50}ms;
+                }
             }
         }
     }
+
+    
 }
 .img-wrapper {
     display: flex;
@@ -123,7 +145,7 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
 }
 
 .item-3 {
-    top: 65%;
+    top: 55%;
 }
 
 .item-4 {

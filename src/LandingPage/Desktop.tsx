@@ -1,8 +1,10 @@
 import { merge, Observable, of, Subject, from, zip, timer, EMPTY, scheduled, asyncScheduler } from 'rxjs';
+
 import * as React from 'react';
 
 import { shareReplay, ignoreElements, mergeMap, concatMap, repeat, takeUntil, tap, delay, retry, catchError } from 'rxjs/operators';
 import Logo from './assets/Logo';
+
 import Social from './social-media/Social'
 import './LandingPage.scss';
 
@@ -10,6 +12,7 @@ import image1 from './assets/images/slide-1-min.png';
 import image2 from './assets/images/slide-2-min.png';
 import image3 from './assets/images/slide-3-min.png';
 import { SubscribeForm } from '../SubscribeForm/SubscribeForm';
+
 
 const imageSources = [image1, image2, image3];
 
@@ -100,7 +103,7 @@ export default class LandingPage extends React.Component<{},any> {
                 <div className="item item-1">
                     <Logo/>
                 </div>
-                <div className="slider" ref={this.sliderRef}>{
+                <div className="slider lines" ref={this.sliderRef}>{
                     sliceArrayHelper.map((_, i) =>
                         <div key={i} className="wrap">
                             <div className={'img-wrapper'}>
