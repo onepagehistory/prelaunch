@@ -63,9 +63,18 @@ export default class LandingPage extends React.Component<{},any> {
                     // loop the slider
                     repeat(),
                     // ensure images are spaced at least with SLIDE_DELAY time
-                    concatMap((img$, index) =>
-                        // no delay for the first slide
-                        zip(timer(index ? SLIDE_DELAY : 0), img$, (_, img) => img)
+                    concatMap((img$, index) => {
+                        // show the lines animation before the first slide
+                        if (index == 0) {
+                            return img$.pipe(
+                                tap(() => this.showLines()),
+                                delay(500)
+                            )
+                        }
+
+                        // following slides would have at least SLIDE_DELAY delay
+                        return zip(timer(SLIDE_DELAY), img$, (_, img) => img)
+                    }
                     ),
                     // hide previous image
                     tap(()=> this.hideImage()),
@@ -77,6 +86,14 @@ export default class LandingPage extends React.Component<{},any> {
             ),
             takeUntil(this.destroy$)
         ).subscribe() // empty subscription: doing work in `tap`s
+    }
+
+    showLines(){
+        if (!this.sliderRef.current) {
+            return;
+        }
+
+        this.sliderRef.current.classList.add('lines');
     }
 
     showImage(imgSrc) {
@@ -103,7 +120,7 @@ export default class LandingPage extends React.Component<{},any> {
                 <div className="item item-1">
                     <Logo/>
                 </div>
-                <div className="slider lines" ref={this.sliderRef}>{
+                <div className="slider" ref={this.sliderRef}>{
                     sliceArrayHelper.map((_, i) =>
                         <div key={i} className="wrap">
                             <div className={'img-wrapper'}>
