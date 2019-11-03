@@ -25,6 +25,7 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
             background-image: url('./assets/images/slide-2-min.png');
             background-repeat: no-repeat;
             background-size: cover;
+            z-index: -1;
             background-position: center;
             opacity: .1;
         }
