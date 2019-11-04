@@ -3,6 +3,11 @@
     width: min-content;
     text-align: left;
 
+
+    .is-mobile & {
+        width: 100%;
+    }
+
     &__input {
         min-width: 40rem;
         padding-right: 5rem;
@@ -23,8 +28,11 @@
           }
 
         .is-mobile & {
-            min-width: 20rem;
+            min-width: unset;
+            width: 100%;
+            padding-right: 0;
             font-size: 1.6rem;
+            border-radius: 0;
         }
     }
 
