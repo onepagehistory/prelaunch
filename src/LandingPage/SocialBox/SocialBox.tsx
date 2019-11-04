@@ -1,7 +1,7 @@
 import * as React from 'react';
-import './Social.scss';
+import './SocialBox.scss';
 
-function SocialAssets() {
+function SocialBox() {
     return (
         <div className="social-box">
             <p className="social-box__cta">Follow us:</p>
@@ -64,4 +64,4 @@ function SocialAssets() {
     )
 }
 
-export default SocialAssets
+export { SocialBox }

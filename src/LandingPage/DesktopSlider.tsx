@@ -1,17 +1,9 @@
-import { merge, Observable, of, Subject, from, zip, timer, EMPTY, scheduled, asyncScheduler } from 'rxjs';
-
 import * as React from 'react';
-
-import { shareReplay, ignoreElements, mergeMap, concatMap, repeat, takeUntil, tap, delay, retry, catchError } from 'rxjs/operators';
-import Logo from './assets/Logo';
-
-import Social from './social-media/Social'
-import './LandingPage.scss';
-
+import { asyncScheduler, EMPTY, merge, Observable, of, scheduled, Subject, timer, zip } from 'rxjs';
+import { catchError, concatMap, delay, ignoreElements, mergeMap, repeat, retry, shareReplay, takeUntil, tap } from 'rxjs/operators';
 import image1 from './assets/images/slide-1-min.png';
 import image2 from './assets/images/slide-2-min.png';
 import image3 from './assets/images/slide-3-min.png';
-import { SubscribeForm } from '../SubscribeForm/SubscribeForm';
 
 
 const imageSources = [image1, image2, image3];
@@ -20,7 +12,7 @@ const SLIDE_DELAY = 3000;
 const SLICE_COUNT = 12;
 const sliceArrayHelper = new Array(SLICE_COUNT).fill(undefined);
 
-export default class LandingPage extends React.Component<{},any> {
+export default class DesktopSlider extends React.Component<{},any> {
     sliderRef = React.createRef<HTMLDivElement>();
     slicesRefs = sliceArrayHelper.map(()=> React.createRef<HTMLImageElement>());
     destroy$ = new Subject<void>();
@@ -116,31 +108,14 @@ export default class LandingPage extends React.Component<{},any> {
 
     render(){
         return (
-            <div className="landing-page">
-                <div className="item item-1">
-                    <Logo/>
-                </div>
-                <div className="slider" ref={this.sliderRef}>{
-                    sliceArrayHelper.map((_, i) =>
-                        <div key={i} className="wrap">
-                            <div className={'img-wrapper'}>
-                                <img ref={ this.slicesRefs[i] } className={ 'splitted-image' } />
-                                </div>
+            <div className="slider" ref={this.sliderRef}>{
+                sliceArrayHelper.map((_, i) =>
+                    <div key={i} className="wrap">
+                        <div className={'img-wrapper'}>
+                            <img ref={ this.slicesRefs[i] } className={ 'splitted-image' } />
                             </div>
-                        )}
-                </div>
-                <div className="item item-2">
-                    <h2 className="title">People, Events, Epochs... A new look at the history</h2>
-                    <h1 className="title title--large">COMING SOON</h1>
-                </div>
-
-                <div className="item item-3">
-                    <SubscribeForm />
-                </div>
-
-                <div className="item item-4">
-                    <Social/>
-                </div>
+                        </div>
+                    )}
             </div>
         )
     }

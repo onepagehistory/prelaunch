@@ -41,8 +41,6 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
 }
 
 .announcement {
-    margin: 40% 0 10%;
-
     .is-mobile & {
         display: flex;
         flex-direction: column;
@@ -66,10 +64,6 @@ $indexes: 1,2,3,4,5,6,7,8,9,10,11,12;
             font-size: 3.8rem;
         }
     }
-}
-
-.announcment {
-    margin: 40% 0 10%;
 }
 
 .wrap {
