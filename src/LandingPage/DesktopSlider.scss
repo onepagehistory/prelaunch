@@ -1,0 +1,111 @@
+$slicesIndexes: 0,1,2,3,4,5,6,7,8,9;
+$slicesLength: length($list: $slicesIndexes);
+$slide-animation-duration: 175;
+$slide-animation-koeff: $slide-animation-duration / 2;
+
+.slider {
+    display: grid;
+    grid-template-columns: repeat($slicesLength, 1fr);
+    height: 100%;
+
+    .slide-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    &.lines .slide-wrapper {
+        &:after {
+            content: '';
+            position: absolute;
+            background-color: rgba(255,255,255, .1);
+            width: 1px;
+            right: 0;
+            top: 0;
+            flex: 0 0;
+   
+            // lines falldown animation
+            animation: lines 400ms ease-in-out;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        @each $index in $slicesIndexes {
+            &:nth-child(#{1 + $index}){
+                .img-wrapper {
+                    animation-delay: #{$index*$slide-animation-koeff}ms;
+                }
+    
+                // falldown animation delay
+                &:after {
+                    animation-delay: #{$index*50}ms;
+                }
+            }
+        }
+    }
+
+    .img-wrapper {
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+
+        .img {
+            opacity: .1;
+            width: $slicesLength * 100%;
+            flex: 1 0 $slicesLength * 100%;;
+            position: relative;
+        }
+    }
+
+    &.slide-in .img-wrapper {
+        transform-origin: right;
+        animation-name: imgOut;
+        animation-duration: #{$slide-animation-duration}ms;
+        animation-timing-function: ease-out;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+    }
+
+    &.slide-out .img-wrapper {
+        transform-origin: left;
+        animation-name: imgIn;
+        animation-duration: #{$slide-animation-duration}ms;
+        animation-timing-function: ease-out;
+        animation-iteration-count: 1;
+        animation-fill-mode: backwards;
+    }
+
+}
+
+@keyframes lines {
+    from {
+        bottom: 100%;
+    }
+
+    to {
+        bottom: 0;
+    }
+}
+
+@keyframes imgIn {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes imgOut {
+    from {
+        transform: scaleX(1);
+    }
+
+    to {
+        transform: scaleX(0);
+
+    }
+}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { asyncScheduler, EMPTY, merge, Observable, of, scheduled, Subject, timer, zip } from 'rxjs';
 import { catchError, concatMap, delay, ignoreElements, mergeMap, repeat, retry, shareReplay, takeUntil, tap } from 'rxjs/operators';
+import './DesktopSlider.scss';
 import image1 from './assets/images/slide-1-min.png';
 import image2 from './assets/images/slide-2-min.png';
 import image3 from './assets/images/slide-3-min.png';
@@ -8,8 +9,9 @@ import image3 from './assets/images/slide-3-min.png';
 
 const imageSources = [image1, image2, image3];
 
-const SLIDE_DELAY = 3000;
-const SLICE_COUNT = 12;
+const SLIDE_DELAY = 3200;
+const SLIDE_GAP = 1000;
+const SLICE_COUNT = 10;
 const sliceArrayHelper = new Array(SLICE_COUNT).fill(undefined);
 
 export default class DesktopSlider extends React.Component<{},any> {
@@ -66,12 +68,11 @@ export default class DesktopSlider extends React.Component<{},any> {
 
                         // following slides would have at least SLIDE_DELAY delay
                         return zip(timer(SLIDE_DELAY), img$, (_, img) => img)
-                    }
-                    ),
+                    }),
                     // hide previous image
                     tap(()=> this.hideImage()),
                     // delay displaying new image for slide-out animation
-                    delay(500),
+                    delay(SLIDE_GAP),
                     // show the next image
                     tap((src)=> this.showImage(src)),
                 )
@@ -110,13 +111,13 @@ export default class DesktopSlider extends React.Component<{},any> {
         return (
             <div className="slider" ref={this.sliderRef}>{
                 sliceArrayHelper.map((_, i) =>
-                    <div key={i} className="wrap">
-                        <div className={'img-wrapper'}>
-                            <img ref={ this.slicesRefs[i] } className={ 'splitted-image' } />
-                            </div>
+                    <div key={i} className="slide-wrapper">
+                        <div className="img-wrapper">
+                            <img ref={ this.slicesRefs[i] } className="img" />
                         </div>
-                    )}
-            </div>
+                    </div>
+                )
+            }</div>
         )
     }
 }

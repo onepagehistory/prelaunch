@@ -57,8 +57,8 @@ export const SubscribeForm = () => {
                 <input name="email" required className="subscribe-form__input" type="email" placeholder="Enter your email to subscribe" />
                 <button className="subscribe-form__button" type="submit">
                 <svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <g id="WH-prelaunch-landing" transform="translate(-853.000000, -690.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                        <g id="WH-prelaunch-landing" transform="translate(-853.000000, -690.000000)" fill="#FFFFFF" fillRule="nonzero">
                             <g id="arrow_forward-24px" transform="translate(846.000000, 683.000000)">
                                 <polygon id="Path" points="21 7 18.5325 9.4675 28.2975 19.25 7 19.25 7 22.75 28.2975 22.75 18.5325 32.5325 21 35 35 21"></polygon>
                             </g>
