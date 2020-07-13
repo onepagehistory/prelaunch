@@ -44,9 +44,9 @@ export const LandingPage = () => {
                 <h2 className="title title--large">COMING SOON</h2>
             </div>
 
-            {/* <div className="item item-3">
+            <div className="item item-3">
                 <SubscribeForm />
-            </div> */}
+            </div>
 
             {/* <div className="item item-4">
                 <SocialBox />
